@@ -4,7 +4,8 @@
   "description": "Simple online market",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/macnaer/bootshop/issues"
   },
-  "homepage": "https://github.com/macnaer/bootshop#readme"
+  "homepage": "https://github.com/macnaer/bootshop#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.4"
+  }
 }
