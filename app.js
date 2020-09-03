@@ -18,10 +18,12 @@ app.use(express.static(path.join(__dirname, "static")));
 
 app.use(mainRoutes);
 
-sequalize
-  .sync()
-  .then((connectionRezult) => {
-    //console.log("connectionRezult = ", connectionRezult);
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch((err) => console.log(err));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// sequalize
+//   .sync()
+//   .then((connectionRezult) => {
+//     //console.log("connectionRezult = ", connectionRezult);
+//     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+//   })
+//   .catch((err) => console.log(err));
