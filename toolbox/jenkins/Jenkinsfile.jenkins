@@ -17,6 +17,7 @@ pipeline  {
                 dir('.'){
                     //sh "docker build -t macnaer/chatterboxserver . "
                     echo "First stage works...."
+                    echo "Build trigger test...."
                 }
             }
         }
