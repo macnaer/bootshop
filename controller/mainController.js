@@ -1,6 +1,17 @@
+const Product = require("../models/product");
+
+
 // Home page
 exports.getHomePage = (req, res, next) => {
-  res.render("pages/home");
+  Product.fetchAll()
+  .then(([rows, fieldData]) => {
+    res.render("pages/home", {
+      products: rows,
+      pageTitle: "All products",
+      path: '/'
+    });
+  })
+  .catch(err => console.log(err))
 };
 
 // Contact page
