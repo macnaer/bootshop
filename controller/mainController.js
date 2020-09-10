@@ -3,15 +3,17 @@ const Product = require("../models/product");
 
 // Home page
 exports.getHomePage = (req, res, next) => {
-  Product.fetchAll()
-  .then(([rows, fieldData]) => {
+
+  Product.findAll()
+  .then((products) => {
     res.render("pages/home", {
-      products: rows,
+      products: products,
       pageTitle: "All products",
-      path: '/'
+      path: 'pages/home'
     });
   })
   .catch(err => console.log(err))
+  
 };
 
 // Contact page
