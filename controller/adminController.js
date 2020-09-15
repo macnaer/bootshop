@@ -6,7 +6,6 @@ exports.getProducts = (req, res, next) => {
       res.render("admin/products", {
         products: products,
         pageTitle: "All products",
-        path: "/admin/products",
       });
     })
     .catch((err) => console.log(err));
