@@ -10,6 +10,7 @@ const app = express();
 const sequalize = require("./helper/database");
 
 // Include Models
+const Product = require("./models/product");
 const User = require("./models/users");
 
 // Routes middleware
@@ -26,8 +27,21 @@ app.use(adminRoutes);
 app.use(mainRoutes);
 app.use(errorController.get404);
 
+app.use((req, res, next) => {
+  User.findByPk(1)
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((err) => console.log(err));
+});
+
+// Relations
+Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+User.hasMany(Product);
+
 sequalize
-  .sync()
+  .sync({ force: true })
   .then((connectionRezult) => {
     return User.findByPk(1);
   })

@@ -9,7 +9,7 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-  console.log("Log => ", req.body);
+  console.log("Log => ", req.users);
   const title = req.body.title;
   const price = req.body.price;
   const sale = req.body.sale;
@@ -20,18 +20,19 @@ exports.postAddProduct = (req, res, next) => {
   const fullDescription = req.body.fullDescription;
   const brand = req.body.brand;
   const model = req.body.model;
-  Product.create({
-    title: title,
-    price: price,
-    sale: sale,
-    imageUrl: imageUrl,
-    quantity: quantity,
-    color: color,
-    shortDescription: shortDescription,
-    fullDescription: fullDescription,
-    brand: brand,
-    model: model,
-  })
+  req.users
+    .createProduct({
+      title: title,
+      price: price,
+      sale: sale,
+      imageUrl: imageUrl,
+      quantity: quantity,
+      color: color,
+      shortDescription: shortDescription,
+      fullDescription: fullDescription,
+      brand: brand,
+      model: model,
+    })
     .then((result) => {
       // console.log(result);
       console.log("Created Product");
