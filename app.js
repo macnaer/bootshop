@@ -12,6 +12,8 @@ const sequalize = require("./helper/database");
 // Include Models
 const Product = require("./models/product");
 const User = require("./models/users");
+const Cart = require("./models/cart");
+const CarItem = require("./models/cartItem");
 
 // Routes middleware
 const adminRoutes = require("./routes/adminRoutes");
@@ -39,6 +41,10 @@ app.use((req, res, next) => {
 // Relations
 Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 User.hasMany(Product);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, { through: CarItem });
+Product.belongsToMany(Cart, { through: CarItem });
 
 sequalize
   .sync({ force: true })
