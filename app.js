@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "static")));
 app.use("/admin", express.static(__dirname + "/static"));
 app.use("/admin/edit-product", express.static(__dirname + "/static"));
+app.use("/products", express.static(__dirname + "/static"));
 
 app.use((req, res, next) => {
   User.findByPk(1)
@@ -64,6 +65,10 @@ sequalize
     return user;
   })
   .then((user) => {
+    // console.log(user);
+    return user.createCart();
+  })
+  .then((cart) => {
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((err) => console.log(err));

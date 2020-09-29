@@ -217,26 +217,35 @@
                 <h4>Latest Products </h4>
                 <ul class="thumbnails">
                     <% if (products.length > 0) { %>
-                    <% products.forEach( product => { %>   
+                    <% products.forEach( product => { %>
                     <li class="span3">
                         <div class="thumbnail">
-                            <a href="product_details.html"><img src="<%= product.imageUrl %>" alt="<%= product.title %>" /></a>
+                            <a href="product_details.html"><img src="<%= product.imageUrl %>"
+                                    alt="<%= product.title %>" /></a>
                             <div class="caption">
                                 <h5><%= product.title %></h5>
                                 <p>
                                     <%= product.shortDescription %>
                                 </p>
 
-                                <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i
-                                            class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                            class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-                                        href="#"><%= product.price %> UAH</a></h4>
+                                <h4 style="text-align:center">
+                                    <a href="/products/<%= product.id %>" class="btn">Details <i
+                                            class="icon-zoom-in"></i></a>
+                                    <form action="/cart" method="post">
+                                        <button class="btn" type="submit">Add to <i
+                                                class="icon-shopping-cart"></i></button>
+                                        <input type="hidden" name="productId" value="<%= product.id %>">
+                                    </form>
+                                    <a class="btn btn-primary" href="#"><%= product.price %> UAH</a>
+                                </h4>
                             </div>
                         </div>
                     </li>
                     <% }) %>
                     <% } else { %>
-                        <ul><h2>No products found.</h2></ul>
+                    <ul>
+                        <h2>No products found.</h2>
+                    </ul>
                     <% } %>
                 </ul>
 

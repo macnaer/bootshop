@@ -22,3 +22,16 @@ exports.getContactPage = (req, res, next) => {
 exports.getFAQPage = (req, res, next) => {
   res.render("pages/faq");
 };
+
+exports.getProduct = (req, res, next) => {
+  const prodId = req.params.productId;
+  Product.findByPk(prodId)
+    .then((product) => {
+      res.render("pages/product-detail", {
+        product: product,
+        pageTitle: product.title,
+        path: "/products",
+      });
+    })
+    .catch((err) => console.log(err));
+};

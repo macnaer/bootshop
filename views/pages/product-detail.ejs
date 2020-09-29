@@ -1,0 +1,21 @@
+<%- include('../layouts/header.ejs') %>
+<div id="mainBody">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1><%= product.title %></h1>
+                <hr>
+                <div class="image img-thumbnail">
+                    <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                </div>
+                <h2>Price <%= product.price %> UAH</h2>
+                <p>Description <%= product.fullDescription %></p>
+                <p>Brand <%= product.brand %></p>
+                <p>Model <%= product.model %></p>
+                <p>Released <%= product.released === '' ? product.released : "N/A"  %></p>
+                <p>Dimensions <%= product.dimensions === '' ? product.dimensions : "N/A"  %></p>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../layouts/footer.ejs') %>
