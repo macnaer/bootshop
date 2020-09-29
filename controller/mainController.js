@@ -35,3 +35,18 @@ exports.getProduct = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
+
+exports.getCart = (req, res, next) => {
+  console.log("req getCart => ", req.user);
+  req.user
+    .getCart()
+    .then((cart) => {
+      return cart.getProducts().then((products) => {
+        res.render("pages/cart", {
+          path: "/cart",
+          products: products,
+        });
+      });
+    })
+    .catch((err) => console.log(err));
+};

@@ -65,7 +65,6 @@ sequalize
     return user;
   })
   .then((user) => {
-    // console.log(user);
     return user.createCart();
   })
   .then((cart) => {
