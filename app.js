@@ -47,12 +47,12 @@ Cart.belongsToMany(Product, { through: CarItem });
 Product.belongsToMany(Cart, { through: CarItem });
 
 sequalize
-  .sync({ force: true })
+  .sync()
   .then((connectionRezult) => {
     return User.findByPk(1);
   })
   .then((user) => {
-    console.log("user => ", user);
+    // console.log("user => ", user);
     if (!user) {
       return User.create({
         name: "master",

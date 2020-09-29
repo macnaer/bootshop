@@ -23,10 +23,10 @@
                                         href="#"><%= product.price %> UAH</a></h4>
                             </div>
                             <div style="width:100%;padding-left: 25%;">
-                                <button style=" cursor: pointer; margin-bottom: 15px;" class="btn"><a
-                                        href='/admin/products_delete/<%= product.id%>'>Delete</a></button>
-                                <button style=" cursor: pointer; margin-bottom: 15px; margin-left: 5px;" class="btn"><a
-                                        href='/admin/products_edit/<%= product.id%>'>Edit</a></button>
+                                <button style=" cursor: pointer; margin-bottom: 15px; margin-right: 5px;" class="btn"><a
+                                        href='/admin/edit-product/<%= product.id%>?edit=true'>Edit</a></button>
+                                <button style=" cursor: pointer; margin-bottom: 15px;" class="btn">
+                                    <a href='/admin/products_delete/<%= product.id%>'>Delete</a></button>
                             </div>
                         </div>
                     </li>

@@ -9,7 +9,7 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-  console.log("Log => ", req.users);
+  console.log("Log => ", req.body);
   const title = req.body.title;
   const price = req.body.price;
   const sale = req.body.sale;
@@ -20,21 +20,21 @@ exports.postAddProduct = (req, res, next) => {
   const fullDescription = req.body.fullDescription;
   const brand = req.body.brand;
   const model = req.body.model;
-  req.users
-    .createProduct({
-      title: title,
-      price: price,
-      sale: sale,
-      imageUrl: imageUrl,
-      quantity: quantity,
-      color: color,
-      shortDescription: shortDescription,
-      fullDescription: fullDescription,
-      brand: brand,
-      model: model,
-    })
+  Product.create({
+    title: title,
+    price: price,
+    sale: sale,
+    imageUrl: imageUrl,
+    quantity: quantity,
+    color: color,
+    shortDescription: shortDescription,
+    fullDescription: fullDescription,
+    brand: brand,
+    model: model,
+    userId: 1,
+  })
+
     .then((result) => {
-      // console.log(result);
       console.log("Created Product");
       res.redirect("/admin/products");
     })
@@ -45,12 +45,16 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getEditProduct = (req, res, next) => {
   const editMode = req.query.edit;
+  console.log(editMode);
   if (!editMode) {
     return res.redirect("/");
   }
+
   const prodId = req.params.productId;
-  Product.findById(prodId)
-    .then((product) => {
+  //req.user.getProducts({ where: { id: prodId } })
+  Product.findByPk(prodId)
+    .then((products) => {
+      const product = products[0];
       if (!product) {
         return res.redirect("/");
       }
