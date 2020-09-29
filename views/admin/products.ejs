@@ -25,8 +25,10 @@
                             <div style="width:100%;padding-left: 25%;">
                                 <button style=" cursor: pointer; margin-bottom: 15px; margin-right: 5px;" class="btn"><a
                                         href='/admin/edit-product/<%= product.id%>?edit=true'>Edit</a></button>
-                                <button style=" cursor: pointer; margin-bottom: 15px;" class="btn">
-                                    <a href='/admin/products_delete/<%= product.id%>'>Delete</a></button>
+                                <form class="btn-delete-product" action="/admin/delete-product" method="POST">
+                                    <input type="hidden" value="<%= product.id %>" name="productId">
+                                    <button class="btn" type="submit">Delete</button>
+                                </form>
                             </div>
                         </div>
                     </li>

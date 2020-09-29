@@ -4,9 +4,9 @@ const DBUSERNAME = process.env.DBUSERNAME;
 const PASSWORD = process.env.PASSWORD;
 const DATABASENAME = process.env.DATABASENAME;
 
-const sequalize = new Sequalize(DATABASENAME, DBUSERNAME, PASSWORD, {
+const sequalize = new Sequalize("bootshop", "root", "", {
   dialect: "mysql",
-  host: DBHOST,
+  host: "localhost",
 });
 
 module.exports = sequalize;
