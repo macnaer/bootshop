@@ -50,3 +50,20 @@ exports.getCart = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
+
+exports.postCart = (req, res, next) => {
+  const productId = req.body.productId;
+  req.user
+    .getCart()
+    .then((cart) => {
+      return cart.findByPk(productId);
+    })
+    .then((products) => {
+      let product;
+      if (products.length > 0) {
+        product = products[0];
+      }
+      console.log("postCart => product => ", product);
+    })
+    .catch((err) => console.log(err));
+};
