@@ -6,7 +6,7 @@ const DATABASENAME = process.env.DATABASENAME;
 
 const sequalize = new Sequalize(DATABASENAME, DBUSERNAME, PASSWORD, {
   dialect: "mysql",
-  host: DBHOST,
+  host: "194.44.93.225",
 });
 
 module.exports = sequalize;
