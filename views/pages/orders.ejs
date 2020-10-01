@@ -28,8 +28,25 @@
                         </tr>
                     </thead>
                     <tbody>
-
-
+                        <% orders.forEach(order => { %>
+                        <% order.products.forEach(product => { %>
+                        <tr>
+                            <td> <img width="60" src="<%= product.imageUrl %>" alt="<%= product.title %>" /></td>
+                            <td><%= product.shortDescription %></td>
+                            <td>
+                                <div class="input-append"><input class="span1" style="max-width:34px"
+                                        value="<%= product.quantity %>" id="appendedInputButtons" size="16"
+                                        type="text"><button class="btn" type="button"><i
+                                            class="icon-minus"></i></button><button class="btn" type="button"><i
+                                            class="icon-plus"></i></button><button class="btn btn-danger"
+                                        type="button"><i class="icon-remove icon-white"></i></button> </div>
+                            </td>
+                            <td><%= product.price %></td>
+                            <td><%= product.sale %></td>
+                            <td><%= product.sale *  product.quantity %></td>
+                        </tr>
+                        <% }) %>
+                        <% }) %>
                         <td colspan="6" style="text-align:right"><strong>TOTAL =</strong></td>
                         <td class="label label-important" style="display:block"> <strong> $155.00 </strong></td>
                         </tr>
@@ -38,10 +55,7 @@
                 <% } else { %>
                 <h2>No orders found.</h2>
                 <% } %>
-                <form action="/orders" method="POST">
-                    <button type="submit" class="btn btn-large pull-right">Order now <i
-                            class="fas fa-shopping-cart"></i></button>
-                </form>
+
 
 
             </div>

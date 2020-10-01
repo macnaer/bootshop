@@ -95,3 +95,30 @@ exports.getOrders = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
+
+exports.postOrder = (req, res, next) => {
+  let currentCart;
+  req.user
+    .getCart()
+    .then((cart) => {
+      currentCart = cart;
+      return cart.getProducts();
+    })
+    .then((products) => {
+      return req.user.createOrder().then((order) => {
+        return order.addProduct(
+          products.map((product) => {
+            product.orderItem = { quantity: product.cartItem.quantity };
+            return product;
+          })
+        );
+      });
+    })
+    .then((result) => {
+      return currentCart.setProducts(null);
+    })
+    .then((result) => {
+      res.redirect("/orders");
+    })
+    .catch((err) => console.log(err));
+};
