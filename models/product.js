@@ -1,56 +1,51 @@
-const Sequelize = require("sequelize");
-const sequelize = require("../helper/database");
+const mongoose = require("mongoose");
 
-const Product = sequelize.define("product", {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true,
+const Schema = mongoose.Schema;
+
+const productSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
   },
-  title: Sequelize.STRING,
   price: {
-    type: Sequelize.DOUBLE,
-    allowNull: false,
+    type: Number,
+    required: true,
   },
-  sale: Sequelize.DOUBLE,
+  sale: {
+    type: Number,
+    required: false,
+  },
   imageUrl: {
-    type: Sequelize.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   quantity: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
+    type: Number,
+    required: true,
   },
-  color: Sequelize.STRING,
+  color: {
+    type: String,
+    required: true,
+  },
   shortDescription: {
-    type: Sequelize.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   fullDescription: {
-    type: Sequelize.TEXT,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   brand: {
-    type: Sequelize.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   model: {
-    type: Sequelize.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
-  released: {
-    type: Sequelize.DATE,
-  },
-  dimensions: {
-    type: Sequelize.STRING,
-  },
-  displaySize: {
-    type: Sequelize.STRING,
-  },
-  features: {
-    type: Sequelize.STRING,
+  feature: {
+    type: String,
+    required: true,
   },
 });
-
-module.exports = Product;
+module.exports = mongoose.model("Product", productSchema);
