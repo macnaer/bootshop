@@ -2,8 +2,7 @@ const Product = require("../models/product");
 
 // Home page
 exports.getHomePage = (req, res, next) => {
-  console.log("getHomePage ==> ", req);
-  Product.findAll()
+  Product.find()
     .then((products) => {
       res.render("pages/home", {
         products: products,

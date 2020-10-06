@@ -4,11 +4,14 @@ const path = require("path");
 const mongoose = require("mongoose");
 const errorController = require("./controller/errorController");
 
+// Include Models
+const User = require("./models/users");
+
 const PORT = 8000;
 const app = express();
 
 // Routes middleware
-// const adminRoutes = require("./routes/adminRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const mainRoutes = require("./routes/mainRoutes");
 
 app.set("view engine", "ejs");
@@ -28,7 +31,7 @@ app.use(express.static(path.join(__dirname, "static")));
 //   //   .catch((err) => console.log(err));
 // });
 
-// app.use(adminRoutes);
+app.use(adminRoutes);
 app.use(mainRoutes);
 app.use(errorController.get404);
 
@@ -38,7 +41,19 @@ mongoose
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then((result) => {
-    app.listen(3000, () => console.log(`Server running on port ${PORT}`));
+    User.findOne().then((user) => {
+      if (!user) {
+        const user = new User({
+          name: "master",
+          email: "master@gmail.com",
+          cart: {
+            items: [],
+          },
+        });
+        user.save();
+      }
+    });
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((err) => {
     console.log(err);

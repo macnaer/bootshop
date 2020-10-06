@@ -1,25 +1,28 @@
-const Sequalize = require("sequelize");
-const sequelize = require("../helper/database");
+const mongoose = require("mongoose");
 
-const User = sequelize.define("user", {
-  id: {
-    type: Sequalize.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true,
-  },
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
   name: {
-    type: Sequalize.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   email: {
-    type: Sequalize.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
-  password: {
-    type: Sequalize.STRING,
-    allowNull: false,
+  cart: {
+    items: [
+      {
+        productId: {
+          type: Schema.Types.ObjectId,
+          ref: "Product",
+          required: true,
+        },
+        quantity: { type: Number, required: true },
+      },
+    ],
   },
 });
 
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);
