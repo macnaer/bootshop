@@ -15,18 +15,18 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "static")));
-app.use("/admin", express.static(__dirname + "/static"));
-app.use("/admin/edit-product", express.static(__dirname + "/static"));
-app.use("/products", express.static(__dirname + "/static"));
+// app.use("/admin", express.static(__dirname + "/static"));
+// app.use("/admin/edit-product", express.static(__dirname + "/static"));
+// app.use("/products", express.static(__dirname + "/static"));
 
-app.use((req, res, next) => {
-  // User.findByPk(1)
-  //   .then((user) => {
-  //     req.user = user;
-  //     next();
-  //   })
-  //   .catch((err) => console.log(err));
-});
+// app.use((req, res, next) => {
+//   // User.findByPk(1)
+//   //   .then((user) => {
+//   //     req.user = user;
+//   //     next();
+//   //   })
+//   //   .catch((err) => console.log(err));
+// });
 
 // app.use(adminRoutes);
 app.use(mainRoutes);
@@ -38,7 +38,6 @@ mongoose
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then((result) => {
-    console.log("result ", result);
     app.listen(3000, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((err) => {
