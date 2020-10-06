@@ -43,7 +43,7 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  feature: {
+  features: {
     type: String,
     required: true,
   },

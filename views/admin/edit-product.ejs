@@ -60,6 +60,11 @@
                         <% if (editing) { %>
                         <input type="hidden" value="<%= product.id %>" name="productId">
                         <% } %>
+                        <div class="form-control">
+                            <label for="features">Features</label>
+                            <textarea name="features" id="features"
+                                rows="5"><% if (editing) { %><%= product.features %><% } %></textarea>
+                        </div>
 
                         <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Add
                             Product<% } %></button>
