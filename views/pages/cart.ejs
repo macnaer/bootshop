@@ -28,21 +28,29 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <% product.forEach(productItem => { %>
                         <tr>
-                            <td> <img width="60" src="<%= product[0].imageUrl %>" alt="<%= product[0].title %>" /></td>
-                            <td><%= product[0].shortDescription %></td>
+                            <td> <img width="60" src="<%= productItem.productId.imageUrl %>"
+                                    alt="<%= product[0].title %>" /></td>
+                            <td><%= productItem.productId.shortDescription %></td>
                             <td>
                                 <div class="input-append"><input class="span1" style="max-width:34px"
-                                        value="<%= product[0].quantity %>" id="appendedInputButtons" size="16"
-                                        type="text"><button class="btn" type="button"><i
+                                        value="<%= productItem.productId.quantity %>" id="appendedInputButtons"
+                                        size="16" type="text"><button class="btn" type="button"><i
                                             class="icon-minus"></i></button><button class="btn" type="button"><i
-                                            class="icon-plus"></i></button><button class="btn btn-danger"
-                                        type="button"><i class="icon-remove icon-white"></i></button> </div>
+                                            class="icon-plus"></i></button>
+                                    <form action="/cart-delete-item" method="POST">
+                                        <input type="hidden" value="<%= productItem.productId._id %>" name="productId">
+                                        <button class="btn danger" type="submit"><i
+                                                class="icon-remove icon-red"></i></button>
+                                    </form>
+                                </div>
                             </td>
-                            <td><%= product[0].price %></td>
-                            <td><%= product[0].sale %></td>
-                            <td><%= product[0].sale *  product[0].quantity %></td>
+                            <td><%= productItem.productId.price %></td>
+                            <td><%= productItem.productId.sale %></td>
+                            <td><%= productItem.productId.sale *  productItem.productId.quantity %></td>
                         </tr>
+                        <% }) %>
                         <tr>
                             <td colspan="6" style="text-align:right"><strong>TOTAL =</strong></td>
                             <td class="label label-important" style="display:block"> <strong> $155.00 </strong></td>

@@ -31,24 +31,29 @@
                         <% orders.forEach(order => { %>
                         <% order.products.forEach(product => { %>
                         <tr>
-                            <td> <img width="60" src="<%= product.imageUrl %>" alt="<%= product.title %>" /></td>
-                            <td><%= product.shortDescription %></td>
+                            <td> <img width="60" src="<%= product.product.imageUrl %>"
+                                    alt="<%= product.product.title %>" />
+                            </td>
+                            <td><%= product.product.shortDescription %></td>
                             <td>
                                 <div class="input-append"><input class="span1" style="max-width:34px"
-                                        value="<%= product.quantity %>" id="appendedInputButtons" size="16"
+                                        value="<%= product.product.quantity %>" id="appendedInputButtons" size="16"
                                         type="text"><button class="btn" type="button"><i
                                             class="icon-minus"></i></button><button class="btn" type="button"><i
-                                            class="icon-plus"></i></button><button class="btn btn-danger"
-                                        type="button"><i class="icon-remove icon-white"></i></button> </div>
+                                            class="icon-plus"></i></button>
+                                    <form action="/cart-delete-item" method="POST">
+                                        <input type="hidden" value="<%= product._id %>" name="productId">
+                                        <button class="btn danger" type="submit"><i
+                                                class="icon-remove icon-red"></i></button>
+                                    </form>
+                                </div>
                             </td>
-                            <td><%= product.price %></td>
-                            <td><%= product.sale %></td>
-                            <td><%= product.sale *  product.quantity %></td>
+                            <td><%= product.product.price %></td>
+                            <td><%= product.product.sale %></td>
+                            <td><%= product.product.sale *  product.product.quantity %></td>
                         </tr>
+                        <% }); %>
                         <% }) %>
-                        <% }) %>
-                        <td colspan="6" style="text-align:right"><strong>TOTAL =</strong></td>
-                        <td class="label label-important" style="display:block"> <strong> $155.00 </strong></td>
                         </tr>
                     </tbody>
                 </table>

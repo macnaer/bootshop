@@ -33,7 +33,7 @@ exports.postAddProduct = (req, res, next) => {
     brand: brand,
     model: model,
     features: features,
-    userId: req.user._id,
+    userId: req.user,
   });
   product
     .save()
