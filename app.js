@@ -7,6 +7,9 @@ const errorController = require("./controller/errorController");
 // Include Models
 const User = require("./models/users");
 
+// Include DATABASE Settings
+const { DBUSERNAME, PASSWORD } = require("./helper/database");
+
 const PORT = 8000;
 const app = express();
 
@@ -26,7 +29,6 @@ app.use((req, res, next) => {
   User.findById("5f7c9a32e5fc8528b0bc48b2")
     .then((user) => {
       req.user = user;
-      console.log("Get user by ID===>>>> ", user);
       next();
     })
     .catch((err) => console.log(err));
@@ -38,7 +40,7 @@ app.use(errorController.get404);
 
 mongoose
   .connect(
-    "mongodb+srv://admin:bootshop_admin@cluster0.x6bhk.mongodb.net/bootsoop?retryWrites=true&w=majority",
+    `mongodb+srv://${DBUSERNAME}:${PASSWORD}@cluster0.x6bhk.mongodb.net/bootsoop?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then((result) => {
