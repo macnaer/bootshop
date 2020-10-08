@@ -31,7 +31,7 @@
                         <% product.forEach(productItem => { %>
                         <tr>
                             <td> <img width="60" src="<%= productItem.productId.imageUrl %>"
-                                    alt="<%= product[0].title %>" /></td>
+                                    alt="<%= productItem.product.title %>" /></td>
                             <td><%= productItem.productId.shortDescription %></td>
                             <td>
                                 <div class="input-append"><input class="span1" style="max-width:34px"
