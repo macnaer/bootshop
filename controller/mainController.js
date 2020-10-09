@@ -3,12 +3,16 @@ const Order = require("../models/order");
 
 // Home page
 exports.getHomePage = (req, res, next) => {
+  console.log("Req ==> ", req.isLoggedIn);
+  console.log("session ==> ", req.session);
+  console.log("req.session ==> ", req.session.isLoggedIn);
   Product.find()
     .then((products) => {
       res.render("pages/home", {
         products: products,
         pageTitle: "All products",
         path: "pages/home",
+        isAuthenticated: req.session.isLoggedIn,
       });
     })
     .catch((err) => console.log(err));
@@ -16,12 +20,16 @@ exports.getHomePage = (req, res, next) => {
 
 // Contact page
 exports.getContactPage = (req, res, next) => {
-  res.render("pages/contacts");
+  res.render("pages/contacts", {
+    isAuthenticated: req.session.isLoggedIn,
+  });
 };
 
 // FAQ page
 exports.getFAQPage = (req, res, next) => {
-  res.render("pages/faq");
+  res.render("pages/faq", {
+    isAuthenticated: req.session.isLoggedIn,
+  });
 };
 
 exports.getProduct = (req, res, next) => {
@@ -32,6 +40,7 @@ exports.getProduct = (req, res, next) => {
         product: product,
         pageTitle: product.title,
         path: "/products",
+        isAuthenticated: req.session.isLoggedIn,
       });
     })
     .catch((err) => console.log(err));
@@ -46,6 +55,7 @@ exports.getCart = (req, res, next) => {
       res.render("pages/cart", {
         path: "/cart",
         product: products,
+        isAuthenticated: req.session.isLoggedIn,
       });
     })
     .catch((err) => console.log(err));
@@ -70,6 +80,7 @@ exports.getOrders = (req, res, next) => {
         path: "/orders",
         pageTitle: "Your Orders",
         orders: orders,
+        isAuthenticated: req.session.isLoggedIn,
       });
     })
     .catch((err) => console.log(err));
