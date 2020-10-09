@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const mongoose = require("mongoose");
 const errorController = require("./controller/errorController");
+const session = require("express-session");
 
 // Include Models
 const User = require("./models/users");
@@ -19,6 +20,13 @@ const mainRoutes = require("./routes/mainRoutes");
 
 app.set("view engine", "ejs");
 app.set("views", "views");
+app.use(
+  session({
+    secret: "my super secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "static")));
 app.use("/admin", express.static(__dirname + "/static"));
