@@ -17,9 +17,13 @@ const app = express();
 // Routes middleware
 const adminRoutes = require("./routes/adminRoutes");
 const mainRoutes = require("./routes/mainRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 app.set("view engine", "ejs");
 app.set("views", "views");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "static")));
 app.use(
   session({
     secret: "my super secret",
@@ -27,8 +31,7 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "static")));
+
 app.use("/admin", express.static(__dirname + "/static"));
 app.use("/admin/edit-product", express.static(__dirname + "/static"));
 app.use("/products", express.static(__dirname + "/static"));
@@ -44,6 +47,7 @@ app.use((req, res, next) => {
 
 app.use(adminRoutes);
 app.use(mainRoutes);
+app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
