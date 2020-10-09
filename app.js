@@ -4,6 +4,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const errorController = require("./controller/errorController");
 const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 // Include Models
 const User = require("./models/users");
@@ -13,6 +14,15 @@ const { DBUSERNAME, PASSWORD } = require("./helper/database");
 
 const PORT = 8000;
 const app = express();
+
+// MongoDB Connection string
+const MONGO_URL = `mongodb+srv://${DBUSERNAME}:${PASSWORD}@cluster0.x6bhk.mongodb.net/bootsoop?retryWrites=true&w=majority`;
+
+// Create MongoDB Store
+const store = new MongoDBStore({
+  uri: MONGO_URL,
+  collection: "sessions",
+});
 
 // Routes middleware
 const adminRoutes = require("./routes/adminRoutes");
@@ -29,8 +39,9 @@ app.use(
     secret: "my super secret",
     resave: false,
     saveUninitialized: false,
+    store: store,
     cookie: {
-      maxAge: 6000,
+      maxAge: 60000,
     },
   })
 );
@@ -54,10 +65,7 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect(
-    `mongodb+srv://${DBUSERNAME}:${PASSWORD}@cluster0.x6bhk.mongodb.net/bootsoop?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     User.findOne().then((user) => {
       if (!user) {

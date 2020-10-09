@@ -3,9 +3,7 @@ const Order = require("../models/order");
 
 // Home page
 exports.getHomePage = (req, res, next) => {
-  console.log("Req ==> ", req.isLoggedIn);
   console.log("session ==> ", req.session);
-  console.log("req.session ==> ", req.session.isLoggedIn);
   Product.find()
     .then((products) => {
       res.render("pages/home", {
