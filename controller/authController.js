@@ -2,20 +2,29 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/users");
 
 exports.getLogin = (req, res, next) => {
-  console.log("hetLogin =====>>> ", req.session.isLoggedIn);
   res.render("pages/auth", {
     isAuthenticated: false,
   });
 };
 
 exports.postLogin = (req, res, next) => {
-  User.findById("5f85b52100e47715ac210361")
+  const { email, password } = req.body;
+
+  User.findOne({ email: email })
     .then((user) => {
-      req.session.isLoggedIn = true;
-      req.session.user = user;
-      req.session.save((err) => {
-        console.log(err);
-        res.redirect("/");
+      if (!user) {
+        return res.redirect("/login");
+      }
+
+      bcrypt.compare(password, user.password).then((match) => {
+        if (match) {
+          req.session.isLoggedIn = true;
+          req.session.user = user;
+          return req.session.save((err) => {
+            res.redirect("/");
+          });
+        }
+        res.redirect("/login");
       });
     })
     .catch((err) => console.log(err));
