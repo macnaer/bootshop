@@ -1,4 +1,6 @@
+const bcrypt = require("bcryptjs");
 const User = require("../models/users");
+
 exports.getLogin = (req, res, next) => {
   console.log("hetLogin =====>>> ", req.session.isLoggedIn);
   res.render("pages/auth", {
@@ -40,10 +42,13 @@ exports.postRegister = (req, res, next) => {
         if (user) {
           return res.redirect("/login");
         }
+        return bcrypt.hash(password, 12);
+      })
+      .then((hashPassword) => {
         const newUser = new User({
           name: username,
           email: email,
-          password: password,
+          password: hashPassword,
           cart: { items: [] },
         });
         return newUser.save();
