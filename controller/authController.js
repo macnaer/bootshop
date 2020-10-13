@@ -25,3 +25,9 @@ exports.postLogout = (req, res, next) => {
     res.redirect("/");
   });
 };
+
+exports.getRegister = (req, res, next) => {
+  res.render("pages/register", {
+    isAuthenticated: false,
+  });
+};
