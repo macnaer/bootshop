@@ -21,6 +21,7 @@ exports.postAddProduct = (req, res, next) => {
   const brand = req.body.brand;
   const model = req.body.model;
   const features = req.body.features;
+  console.log("req.user ===>>> ", req.user);
   const product = new Product({
     title: title,
     price: price,
@@ -33,7 +34,7 @@ exports.postAddProduct = (req, res, next) => {
     brand: brand,
     model: model,
     features: features,
-    userId: req.user,
+    userId: req.session.user,
   });
   product
     .save()

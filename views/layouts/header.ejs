@@ -44,9 +44,10 @@
                     <div class="pull-right">
                         <% if (isAuthenticated) { %>
                         <a href="/admin/products"><span class="">Admin Panel</span></a>
-                        <% } %>
+
                         <a href="/cart"><span class="btn btn-mini btn-primary"><i
                                     class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
+                        <% } %>
                     </div>
                 </div>
             </div>
@@ -73,13 +74,21 @@
                     </form>
                     <ul id="topMenu" class="nav pull-right">
                         <li class=""><a href="/contacts">Contact</a></li>
+                        <% if (isAuthenticated) { %>
                         <li class="main-header__item">
                             <a class="cart" href="/cart">Cart</a>
                             <a class="cart" href="/orders">Orders</a>
                         </li>
+                        <% } %>
                         <li class="">
-                            <a href="/login" role="button" data-toggle="modal" style="padding-right:0"><span
+                            <% if (!isAuthenticated) { %>
+                            <a href="/login" role="button" style="padding-right:0"><span
                                     class="btn btn-large btn-success">Login</span></a>
+                            <% } else { %>
+                            <form action="/logout" method="POST">
+                                <button type="submit">Logout</button>
+                            </form>
+                            <% } %>
                             <div id="login" class="modal hide fade in" tabindex="-1" role="dialog"
                                 aria-labelledby="login" aria-hidden="false">
                                 <div class="modal-header">

@@ -14,7 +14,6 @@
                 <h3> SHOPPING CART [ <small>3 Item(s) </small>]<a href="/" class="btn btn-large pull-right"><i
                             class="icon-arrow-left"></i> Continue Shopping </a></h3>
                 <hr class="soft" />
-
                 <% if (product.length > 0) { %>
                 <table class="table table-bordered">
                     <thead>
@@ -29,26 +28,27 @@
                     </thead>
                     <tbody>
                         <% product.forEach(productItem => { %>
+                        ============ <%= productItem %>
+                        <% productItem.productId  %>
                         <tr>
-                            <td> <img width="60" src="<%= productItem.productId.imageUrl %>"
-                                    alt="<%= productItem.product.title %>" /></td>
-                            <td><%= productItem.productId.shortDescription %></td>
+                            <td> <img width="60" src="<%= productItem %>" alt="<%= productItem %>" /></td>
+                            <td>title <%= productItem.productId  %></td>
                             <td>
                                 <div class="input-append"><input class="span1" style="max-width:34px"
-                                        value="<%= productItem.productId.quantity %>" id="appendedInputButtons"
-                                        size="16" type="text"><button class="btn" type="button"><i
+                                        value="<%= productItem %>" id="appendedInputButtons" size="16"
+                                        type="text"><button class="btn" type="button"><i
                                             class="icon-minus"></i></button><button class="btn" type="button"><i
                                             class="icon-plus"></i></button>
                                     <form action="/cart-delete-item" method="POST">
-                                        <input type="hidden" value="<%= productItem.productId._id %>" name="productId">
+                                        <input type="hidden" value="<%= productItem %>" name="productId">
                                         <button class="btn danger" type="submit"><i
                                                 class="icon-remove icon-red"></i></button>
                                     </form>
                                 </div>
                             </td>
-                            <td><%= productItem.productId.price %></td>
-                            <td><%= productItem.productId.sale %></td>
-                            <td><%= productItem.productId.sale *  productItem.productId.quantity %></td>
+                            <td><%= productItem %></td>
+                            <td><%= productItem %></td>
+                            <td><%= productItem *  productItem %></td>
                         </tr>
                         <% }) %>
                         <tr>
