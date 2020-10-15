@@ -61,6 +61,7 @@
                 <h2>No products found.</h2>
                 <% } %>
                 <form action="/make-order" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                     <button type="submit" class="btn btn-large pull-right">Order now <i
                             class="fas fa-shopping-cart"></i></button>
                 </form>

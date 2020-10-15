@@ -13,6 +13,7 @@
                     <form class="form-horizontal" action="/register" method="POST">
                         <h4>Your personal information</h4>
                         <div class="control-group">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                             <label class="control-label" for="inputFname1">Username <sup>*</sup></label>
                             <div class="controls">
                                 <input type="text" id="inputFname" name="username" placeholder="Username">

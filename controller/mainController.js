@@ -10,7 +10,6 @@ exports.getHomePage = (req, res, next) => {
         products: products,
         pageTitle: "All products",
         path: "pages/home",
-        isAuthenticated: req.session.isLoggedIn,
       });
     })
     .catch((err) => console.log(err));
