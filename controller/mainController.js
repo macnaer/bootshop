@@ -17,9 +17,7 @@ exports.getHomePage = (req, res, next) => {
 
 // Contact page
 exports.getContactPage = (req, res, next) => {
-  res.render("pages/contacts", {
-    isAuthenticated: req.session.isLoggedIn,
-  });
+  res.render("pages/contacts", {});
 };
 
 // FAQ page
