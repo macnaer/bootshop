@@ -233,6 +233,7 @@
                                             class="icon-zoom-in"></i></a>
                                     <% if (isAuthenticated) { %>
                                     <form action="/cart" method="post">
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                                         <button class="btn" type="submit">Add to <i
                                                 class="icon-shopping-cart"></i></button>
                                         <input type="hidden" name="productId" value="<%= product.id %>">

@@ -28,15 +28,16 @@
                     </thead>
                     <tbody>
                         <% product.forEach(productItem => { %>
-                        ============ <%= productItem %>
-                        <% productItem.productId  %>
+                        <!-- ============ <%= productItem %>
+                        <% productItem.productId  %> -->
                         <tr>
-                            <td> <img width="60" src="<%= productItem %>" alt="<%= productItem %>" /></td>
-                            <td>title <%= productItem.productId  %></td>
+                            <td> <img width="60" src="<%= productItem.productId.imageUrl %>"
+                                    alt="<%= productItem.productId.title %>" /></td>
+                            <td><%= productItem.productId.title  %></td>
                             <td>
                                 <div class="input-append"><input class="span1" style="max-width:34px"
-                                        value="<%= productItem %>" id="appendedInputButtons" size="16"
-                                        type="text"><button class="btn" type="button"><i
+                                        value="<%= productItem.productId.quantity %>" id="appendedInputButtons"
+                                        size="16" type="text"><button class="btn" type="button"><i
                                             class="icon-minus"></i></button><button class="btn" type="button"><i
                                             class="icon-plus"></i></button>
                                     <form action="/cart-delete-item" method="POST">
@@ -46,9 +47,9 @@
                                     </form>
                                 </div>
                             </td>
-                            <td><%= productItem %></td>
-                            <td><%= productItem %></td>
-                            <td><%= productItem *  productItem %></td>
+                            <td><%= productItem.productId.price %></td>
+                            <td><%= productItem.productId.sale %></td>
+                            <td><%= productItem.productId.price *  productItem.productId.quantity %></td>
                         </tr>
                         <% }) %>
                         <tr>
